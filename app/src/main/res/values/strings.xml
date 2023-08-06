@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">rumble</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_details">Details</string>
+    <string name="menu_account">Account</string>
+
+    <string name = "name_title">Name</string>
+    <string name = "userId_title">UserId</string>
+    <string name = "email_title">Email</string>
+    <string name = "active_subscriptions_title">Active Subscriptions</string>
+    <string name = "address_title">Address</string>
+    <string name = "phone_title">Phone</string>
+
+    <string name = "image_caption_title">Image Caption</string>
+    <string name = "title1_title">Title 1</string>
+    <string name = "title2_title">Title 2</string>
+    <string name = "keyword1_title">Keyword 1</string>
+    <string name = "keyword2_title">Keyword 2</string>
+    <string name = "author_title">Author</string>
+    <string name = "date_published_title">Date Published</string>
+    <string name = "image_copyright_title">Image Copyright</string>
+    <string name = "content_title">Content</string>
+
+
+    <string name = "username_title">USERNAME</string>
+    <string name = "password_title">PASSWORD</string>
+    <string name = "login_title">LOGIN</string>
+
+    <string name = "subscriptions_error">You dont have access, please subscribe.</string>
+    <string name = "login_error">Please enter username and password.</string>
+</resources>
