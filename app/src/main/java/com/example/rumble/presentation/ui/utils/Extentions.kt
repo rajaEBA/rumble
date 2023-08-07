@@ -5,30 +5,6 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-//fun SharedPreferences.putString(key: String, value: String) {
-//    val jsonString = Gson().toJson(value)
-//    edit().putString(key, jsonString).apply()
-//}
-//
-//fun Context.storeToken(key: String, value: String) {
-//    val sharedPreferences = getSharedPreferences("PREFERENCE_RUMBLE", Context.MODE_PRIVATE)
-//    sharedPreferences.putString(key, value)
-//}
-//
-//fun Context.getToken(key:String): String? {
-//    val sharedPreferences = getSharedPreferences("PREFERENCE_RUMBLE", Context.MODE_PRIVATE)
-//    return sharedPreferences.retrieveString(key)
-//}
-//
-//fun SharedPreferences.retrieveString(key: String): String? {
-//    val jsonString = getString(key, null)
-//    return if (jsonString != null) {
-//        Gson().fromJson(jsonString, String::class.java)
-//    } else {
-//        null
-//    }
-//}
-
 fun SharedPreferences.putValue(key: String, value: Any) {
     val jsonString = Gson().toJson(value)
     edit().putString(key, jsonString).apply()

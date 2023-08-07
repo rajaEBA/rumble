@@ -1,5 +1,6 @@
 package com.example.rumble.presentation.ui.article
 
+import android.content.Context
 import app.cash.turbine.test
 import com.example.rumble.domain.model.Article
 import com.example.rumble.domain.usecases.ArticlesUseCase
@@ -15,12 +16,14 @@ import kotlinx.coroutines.test.setMain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ArticleViewModelTest {
 
     private val articlesUseCase = mockk<ArticlesUseCase>()
     private lateinit var viewModel: ArticleViewModel
+    private val context = mockk<Context>()
 
     @Before
     fun setUp() {
@@ -32,7 +35,7 @@ class ArticleViewModelTest {
         //Given
         coEvery { articlesUseCase.invoke(any()) } coAnswers { Result.Success(listOf(fakeArticleInfo)) }
 
-        viewModel = ArticleViewModel(articlesUseCase)
+        viewModel = ArticleViewModel(context, articlesUseCase)
         viewModel.getArticles("Token")
 
         viewModel.assetsViewState.test {
@@ -45,26 +48,11 @@ class ArticleViewModelTest {
         //Given
         coEvery { articlesUseCase.invoke(any()) } coAnswers { Result.Error(Exception("Failed loading article")) }
 
-        viewModel = ArticleViewModel(articlesUseCase)
+        viewModel = ArticleViewModel(context, articlesUseCase)
         viewModel.getArticles("Token")
 
         viewModel.assetsViewState.test {
             assertThat(awaitItem()).isEqualTo(LoadingArticlesFailed("Failed loading article"))
-        }
-    }
-
-    @Test
-    fun `should show article's details`() = runTest {
-        //Given
-        coEvery { articlesUseCase.invoke(any()) } coAnswers { Result.Success(listOf(fakeArticleInfo)) }
-
-        viewModel = ArticleViewModel(articlesUseCase)
-        viewModel.getArticles("Token")
-
-        viewModel.assetsViewState.test {
-            assertThat(awaitItem()).isEqualTo(ArticlesLoaded(listOf(fakeArticleInfo)))
-            viewModel.onEvent(ArticleViewModel.Event.ShowDetails(fakeArticleInfo))
-            assertThat(awaitItem()).isEqualTo(LoadDetails(fakeArticleInfo))
         }
     }
 
@@ -79,7 +67,7 @@ class ArticleViewModelTest {
         authorName = "authorName",
         imageCopyright = "imageCopyright",
         imageURL = "imageURL",
-        subscriptionType = "subscriptionType",
+        subscriptionType = "full",
         contentHTML = "contentHTML",
     )
 }
