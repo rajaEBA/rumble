@@ -66,7 +66,6 @@ private fun nounDigitalModule() = module {
         )
     }
 
-    //ArticleViewModel
     viewModel {
         ArticleViewModel(
             context = androidApplication(),
@@ -74,7 +73,6 @@ private fun nounDigitalModule() = module {
         )
     }
 
-    //ArticleDetailsViewModel
     factory {
         ArticleDetailsUseCase(
             repository = get()
