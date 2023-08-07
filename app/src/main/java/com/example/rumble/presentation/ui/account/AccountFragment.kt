@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.example.rumble.R
 import com.example.rumble.databinding.FragmentAccountBinding
 import com.example.rumble.domain.model.ProfileInfo
-import com.example.rumble.presentation.ui.main.MainActivity
 import com.example.rumble.presentation.ui.main.MainActivity.Companion.KEY_USER
 
 class AccountFragment : Fragment() {
@@ -28,7 +27,7 @@ class AccountFragment : Fragment() {
             binding.userId.text = profile.userId.toString()
 
             binding.addressTitle.text = requireContext().getString(R.string.address_title)
-            binding.address.text = "${getString(R.string.name_title)} ${profile.address.street}, ${profile.address.street}, ${profile.address.zip}"
+            binding.address.text = "${profile.address.street}, ${profile.address.street}, ${profile.address.zip}"
 
             binding.emailTitle.text = requireContext().getString(R.string.email_title)
             binding.email.text = profile.email

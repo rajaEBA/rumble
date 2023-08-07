@@ -29,4 +29,6 @@
 
     <string name = "subscriptions_error">You dont have access, please subscribe.</string>
     <string name = "login_error">Please enter username and password.</string>
+
+    <string name = "image_copyright_text">Image Copyright of :</string>
 </resources>

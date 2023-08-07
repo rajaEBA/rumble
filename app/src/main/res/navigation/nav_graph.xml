@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    app:launchSingleTop="true"
+    app:popUpToInclusive="true"
     app:startDestination="@+id/articleFragment">
 
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.example.rumble.presentation.ui.article.ArticleFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_article" />
+        tools:layout="@layout/fragment_article"/>
 
     <fragment
         android:id="@+id/accountFragment"

@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
         viewBinding.send.setOnClickListener {
             viewBinding.indicator.visibility = View.VISIBLE
             viewModel.onEvent(Login(LoginCredentials("greta.frucht@rn.de","SuperSecurePW123!")))
+            //TODO dont forget to remove this line
             //viewModel.onEvent(Login(LoginCredentials(viewBinding.usernameEditText.text.toString(),viewBinding.passwordEditText.text.toString())))
         }
     }

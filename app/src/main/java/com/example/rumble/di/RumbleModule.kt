@@ -69,6 +69,7 @@ private fun nounDigitalModule() = module {
     //ArticleViewModel
     viewModel {
         ArticleViewModel(
+            context = androidApplication(),
             articlesUseCase = get(),
         )
     }

@@ -49,8 +49,8 @@ class ArticleAdapter(
     inner class ViewHolder(private val views: ItemArticleBinding) :
         RecyclerView.ViewHolder(views.root) {
         fun bind(position: Int) = views.apply {
-            articles[position].also { article ->
-                article.imageURL?.let { imageUrl ->
+            articles[position].also {
+                it.imageURL?.let { imageUrl ->
                     Glide.with(context)
                         .load(imageUrl)
                         .error(R.drawable.ic_launcher_background)
@@ -61,12 +61,17 @@ class ArticleAdapter(
                         .error(R.drawable.ic_launcher_background)
                         .into(articleCover)
                 }
-                title1.text = "title 1: ${article.title1}"
-                title2.text = article.title2
-                keyword1.text = article.keyword1
-                keyword2.text = article.keyword2
-                author.text = article.authorName
-                imageCopyright.text = article.imageCopyright
+                title1.text = it.title1
+                title2.text = it.title2
+                keyword1.text = it.keyword1
+                keyword2.text = it.keyword2
+                author.text = it.authorName
+                if (!it.subscriptionType.contains("free")) {
+                    imageCopyright.text = "${context.getString(R.string.image_copyright_text)} ${it.imageCopyright}"
+                } else {
+                    imageCopyright.text = it.imageCopyright
+                }
+
             }
         }
     }

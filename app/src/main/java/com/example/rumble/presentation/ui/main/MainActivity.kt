@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         user = intent.extras?.getParcelable(KEY_PROFILE)
             ?: throw IllegalStateException("field $KEY_PROFILE missing in Intent")
-        //activeSubscriptions = user?.activeSubscriptions
 
     }
 
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         const val KEY_PROFILE = "Profile"
         const val KEY_USER = "User"
-      //  var activeSubscriptions: List<String>? = null
 
         fun newIntent(context: Context, user: ProfileInfo): Intent {
             val intent = Intent(context, MainActivity::class.java)
