@@ -1,18 +1,16 @@
 package com.example.rumble.presentation.ui.article
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rumble.domain.model.Article
 import com.example.rumble.domain.usecases.ArticlesUseCase
 import kotlinx.coroutines.launch
 import com.example.rumble.domain.common.Result
-import com.example.rumble.presentation.ui.login.LoginActivity.Companion.KEY_SUBSCRIPTIONS
-import com.example.rumble.presentation.ui.utils.getValue
+import com.example.rumble.presentation.ui.utils.Subscription
 import kotlinx.coroutines.flow.*
 
 class ArticleViewModel(
-    private val context: Context,
+    private val accountType: Subscription,
     private val articlesUseCase: ArticlesUseCase
 ) : ViewModel() {
 
@@ -33,11 +31,10 @@ class ArticleViewModel(
     }
 
     fun onEvent(event: Event) {
-        val data = context.getValue<List<String>>(KEY_SUBSCRIPTIONS)
         viewModelScope.launch {
             when (event) {
                 is Event.ShowDetails -> {
-                    if(shouldShowDetails(data, event.item.subscriptionType)){
+                    if(shouldShowDetails(event.item.subscriptionType)){
                         mutableViewState.emit(ArticleState.LoadDetails(event.item))
                     } else {
                         mutableViewState.emit(ArticleState.NoDetails)
@@ -47,14 +44,10 @@ class ArticleViewModel(
         }
     }
 
-    private fun shouldShowDetails(subscriptionType: List<String>?, articleType: String): Boolean {
-        if (subscriptionType == null) {
-            return false
-        }
-
-        return subscriptionType.contains("full") ||
+    private fun shouldShowDetails(articleType: String): Boolean {
+        return accountType.isUserPremiere() ||
                 (articleType.contains("free") || articleType.contains("sports")) &&
-                subscriptionType.contains("sports")
+                !accountType.isUserPremiere()
     }
 
     sealed class Event {

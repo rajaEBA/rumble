@@ -14,6 +14,7 @@ import com.example.rumble.infrastructure.utils.NetworkManager
 import com.example.rumble.presentation.ui.article.ArticleViewModel
 import com.example.rumble.presentation.ui.details.ArticleDetailsViewModel
 import com.example.rumble.presentation.ui.login.LoginViewModel
+import com.example.rumble.presentation.ui.utils.Subscription
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -33,6 +34,8 @@ private fun nounDigitalModule() = module {
     }
 
     single { NetworkManager(androidApplication()) }
+
+    single { Subscription(androidApplication()) }
 
     single<RumbleRepository>(createdAtStart = true) {
         RumbleRepositoryImpl(
@@ -68,7 +71,7 @@ private fun nounDigitalModule() = module {
 
     viewModel {
         ArticleViewModel(
-            context = androidApplication(),
+            accountType = get(),
             articlesUseCase = get(),
         )
     }

@@ -2,8 +2,16 @@ package com.example.rumble.presentation.ui.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.rumble.presentation.ui.login.LoginActivity.Companion.KEY_SUBSCRIPTIONS
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+
+class Subscription(private val context: Context) {
+    fun isUserPremiere(): Boolean {
+        val accountType = context.getValue<List<String>>(KEY_SUBSCRIPTIONS)
+        return accountType?.contains("full") == true
+    }
+}
 
 fun SharedPreferences.putValue(key: String, value: Any) {
     val jsonString = Gson().toJson(value)
